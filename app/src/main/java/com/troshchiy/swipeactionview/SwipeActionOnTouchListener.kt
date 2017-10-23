@@ -1,7 +1,6 @@
 package com.troshchiy.swipeactionview
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.MotionEvent
 import android.view.MotionEvent.INVALID_POINTER_ID
 import android.view.View
@@ -13,9 +12,7 @@ class SwipeActionOnTouchListener : View.OnTouchListener {
     // The ‘active pointer’ is the one currently moving our object.
     private var activePointerId = INVALID_POINTER_ID
 
-    private var lastViewX = 0f
     private var lastTouchX = 0f
-    private var deltaX = 0f
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent) = when (event.actionMasked) {
@@ -39,12 +36,11 @@ class SwipeActionOnTouchListener : View.OnTouchListener {
     }
 
     private fun actionDown(v: View, event: MotionEvent) {
-        Log.d(TAG, "actionDown")
-
+        // Save the ID of this pointer (for dragging)
         activePointerId = event.actionIndex
 
+        // Remember where we started (for dragging)
         lastTouchX = event.getX(activePointerId)
-        lastViewX = v.x
     }
 
     private fun actionMove(v: View, event: MotionEvent) {
@@ -54,8 +50,6 @@ class SwipeActionOnTouchListener : View.OnTouchListener {
         val dx = x - lastTouchX
 
         v.x += dx
-
-        Log.d(TAG, "deltaX: $deltaX")
     }
 
     private fun actionPointerUp(event: MotionEvent) {
