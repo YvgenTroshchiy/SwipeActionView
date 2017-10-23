@@ -15,7 +15,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
     private val TAG = SwipeActionView::class.java.simpleName
 
-    private val verticalMargin = APP.dpToPx(4f)
+    private val verticalMargin = APP.resources.getDimension(R.dimen.swipeView_circle_margin)
 
     private var circleWidth = 0
     private var rootLayoutMin = 0f
