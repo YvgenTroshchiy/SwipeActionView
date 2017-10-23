@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.swipe_action_view.view.*
 
 
-public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+class SwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : FrameLayout(context, attrs, defStyleAttr) {
 
     init {
@@ -18,7 +18,6 @@ public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: 
         if (isInEditMode) return
 
         View.inflate(context, R.layout.swipe_action_view, this)
-
-        swipeActionView.setOnTouchListener(SwipeActionOnTouchListener())
+        image.setOnTouchListener(SwipeActionOnTouchListener())
     }
 }

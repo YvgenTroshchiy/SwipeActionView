@@ -6,11 +6,11 @@
     android:background="#6b6b6b">
 
     <ImageView
-        android:layout_margin="4dp"
-        android:id="@+id/iv_swipable_image"
+        android:id="@+id/image"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_gravity="center"
+        android:layout_margin="4dp"
         android:adjustViewBounds="true"
         android:background="@drawable/white_circle_drawable"
         android:scaleType="fitCenter" />
