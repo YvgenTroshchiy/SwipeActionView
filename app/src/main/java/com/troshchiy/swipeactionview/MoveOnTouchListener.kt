@@ -6,8 +6,7 @@ import android.view.MotionEvent.INVALID_POINTER_ID
 import android.view.View
 
 
-class SwipeActionOnTouchListener : View.OnTouchListener {
-    private val TAG = SwipeActionOnTouchListener::class.java.simpleName
+class MoveOnTouchListener(private val move: (Float) -> Unit) : View.OnTouchListener {
 
     // The ‘active pointer’ is the one currently moving our object.
     private var activePointerId = INVALID_POINTER_ID
@@ -49,7 +48,7 @@ class SwipeActionOnTouchListener : View.OnTouchListener {
         val x = event.getX(pointerIndex)
         val dx = x - lastTouchX
 
-        v.x += dx
+        move(v.x + dx)
     }
 
     private fun actionPointerUp(event: MotionEvent) {
