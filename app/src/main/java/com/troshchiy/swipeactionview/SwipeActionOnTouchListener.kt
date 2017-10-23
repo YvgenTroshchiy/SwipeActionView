@@ -17,7 +17,7 @@ class SwipeActionOnTouchListener : View.OnTouchListener {
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View, event: MotionEvent) = when (event.actionMasked) {
         MotionEvent.ACTION_DOWN -> {
-            actionDown(v, event)
+            actionDown(event)
             true
         }
         MotionEvent.ACTION_MOVE -> {
@@ -35,7 +35,7 @@ class SwipeActionOnTouchListener : View.OnTouchListener {
         else -> false
     }
 
-    private fun actionDown(v: View, event: MotionEvent) {
+    private fun actionDown(event: MotionEvent) {
         // Save the ID of this pointer (for dragging)
         activePointerId = event.actionIndex
 
