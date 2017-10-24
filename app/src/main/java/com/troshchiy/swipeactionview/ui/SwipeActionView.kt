@@ -18,7 +18,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     private var TAG = getLogTag<SwipeActionView>()
 
     private val verticalMargin = APP.resources.getDimension(R.dimen.swipeView_circle_margin)
-    private val threshold = APP.dpToPx(8f)
+    private val threshold = APP.dpToPx(36f)
 
     private var initialSliderX = 0f
     private var sliderWidth = 0
@@ -87,9 +87,6 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
         slider.animateX(initialSliderX)
     }
 
-    private fun getValueConsideringTheLimits(value: Float, min: Float, max: Float) =
-            Math.min(
-                    Math.max(min, value),
-                    max)
+    private fun getValueConsideringTheLimits(value: Float, min: Float, max: Float) = Math.min(Math.max(min, value), max)
 
 }
