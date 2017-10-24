@@ -1,6 +1,5 @@
 package com.troshchiy.swipeactionview.ui
 
-import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
@@ -117,9 +116,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
-        val animator = ValueAnimator()
-        animator.setIntValues(colorFrom, colorTo)
-        animator.setEvaluator(ArgbEvaluator())
+        val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         animator.addUpdateListener { drawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.setDuration(animDuration).start()
     }
