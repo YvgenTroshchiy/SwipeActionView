@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/swipe_action_view_background">
+    android:background="@android:color/white"
+    tools:background="@color/accept">
 
     <ImageView
         android:id="@+id/slider"
-        android:layout_width="68dp"
-        android:layout_height="68dp"
+        android:layout_width="@dimen/swipeView_size"
+        android:layout_height="@dimen/swipeView_size"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/swipeView_circle_margin"
-        android:layout_marginTop="@dimen/swipeView_circle_margin"
-        android:adjustViewBounds="true"
-        android:background="@drawable/white_circle_drawable"
-        android:scaleType="fitCenter" />
+        android:background="@drawable/white_circle_drawable" />
 
 </FrameLayout>

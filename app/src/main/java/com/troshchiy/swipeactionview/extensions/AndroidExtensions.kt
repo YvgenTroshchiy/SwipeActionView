@@ -1,6 +1,8 @@
 package com.troshchiy.swipeactionview.extensions
 
 import android.content.Context
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Toast
 
@@ -11,3 +13,5 @@ fun Context.dpToPx(dp: Float): Int = (dp * resources.displayMetrics.density + 0.
 
 fun View.animateX(x: Float, duration: Long = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()) =
         animate().x(x).setDuration(duration).start()
+
+fun Context.color(@ColorRes res: Int) = ContextCompat.getColor(this, res)

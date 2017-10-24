@@ -2,6 +2,6 @@
 <resources>
 
     <!-- swipeView -->
-    <dimen name="swipeView_circle_margin">4dp</dimen>
+    <dimen name="swipeView_size">74dp</dimen>
 
 </resources>
