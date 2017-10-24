@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#6b6b6b">
+    android:background="@drawable/swipe_action_view_background">
 
     <ImageView
         android:id="@+id/slider"

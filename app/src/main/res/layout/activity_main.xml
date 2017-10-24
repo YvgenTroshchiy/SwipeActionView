@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#c7c7c7"
     tools:context="com.troshchiy.swipeactionview.ui.MainActivity">
 
     <com.troshchiy.swipeactionview.ui.SwipeActionView
@@ -13,11 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="#6b6b6b"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:background="#ffffff"
         tools:layout_height="70dp" />
 
 </android.support.constraint.ConstraintLayout>
