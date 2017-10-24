@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.troshchiy.swipeactionview.MainActivity">
+    tools:context="com.troshchiy.swipeactionview.ui.MainActivity">
 
-    <com.troshchiy.swipeactionview.SwipeActionView
+    <com.troshchiy.swipeactionview.ui.SwipeActionView
         android:id="@+id/swipeActionView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,8 +1,8 @@
-package com.troshchiy.swipeactionview
+package com.troshchiy.swipeactionview.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import com.troshchiy.swipeactionview.R
 
 class MainActivity : AppCompatActivity() {
 

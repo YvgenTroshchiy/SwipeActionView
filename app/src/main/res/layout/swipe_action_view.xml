@@ -7,7 +7,7 @@
     android:background="#6b6b6b">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/slider"
         android:layout_width="68dp"
         android:layout_height="68dp"
         android:layout_gravity="center"
