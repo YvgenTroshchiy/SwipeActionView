@@ -1,6 +1,7 @@
 package com.troshchiy.swipeactionview.ui
 
-import android.animation.ObjectAnimator
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -90,8 +91,9 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         slider.animateX(maxX)
 
+        val colorFrom = context.color(android.R.color.white)
         val colorTo = context.color(R.color.accept)
-        animRootLayoutBg(colorTo)
+        animRootLayoutBg(colorFrom, colorTo)
     }
 
     private fun rejectSwipe() {
@@ -100,27 +102,25 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         slider.animateX(minSliderX)
 
+        val colorFrom = context.color(android.R.color.white)
         val colorTo = context.color(R.color.reject)
-        animRootLayoutBg(colorTo)
+        animRootLayoutBg(colorFrom, colorTo)
     }
 
     private fun bringBackSlider() {
         logD(TAG, "bringBackSlider")
         slider.animateX(initialSliderX)
 
+        val colorFrom = context.color(R.color.accept)
         val colorTo = Color.WHITE
-        animRootLayoutBg(colorTo)
+        animRootLayoutBg(colorFrom, colorTo)
     }
 
-    private fun animRootLayoutBg(colorTo: Int) {
-        val animator = ObjectAnimator.ofFloat(0f, 1f)
-        animator.addUpdateListener {
-            val value = it.animatedValue as Float
-
-            drawable.setColorFilter(getAnimColor(colorTo, value), PorterDuff.Mode.SRC_ATOP)
-
-            if (value == 1.0f) slider.colorFilter = null
-        }
+    private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
+        val animator = ValueAnimator()
+        animator.setIntValues(colorFrom, colorTo)
+        animator.setEvaluator(ArgbEvaluator())
+        animator.addUpdateListener { drawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.setDuration(animDuration).start()
     }
 
