@@ -16,6 +16,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     private val TAG = SwipeActionView::class.java.simpleName
 
     private val verticalMargin = APP.resources.getDimension(R.dimen.swipeView_circle_margin)
+    private val threshold = APP.dpToPx(16f)
 
     private var circleWidth = 0
     private var rootLayoutMin = 0f
@@ -32,7 +33,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         initDimensions()
 
-        image.setOnTouchListener(MoveOnTouchListener{ move(it) })
+        image.setOnTouchListener(MoveOnTouchListener({ actionMove(it) }, { actionUp(it) }))
     }
 
     private fun initDimensions() {
@@ -50,8 +51,11 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
                 })
     }
 
-    private fun move(x: Float) {
+    private fun actionMove(x: Float) {
         image.x = getValueConsideringTheLimits(x, rootLayoutMin, rootLayoutMax)
+    }
+
+    private fun actionUp(x: Float) {
     }
 
     private fun getValueConsideringTheLimits(value: Float, min: Float, max: Float) =
