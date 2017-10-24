@@ -1,10 +1,12 @@
 package com.troshchiy.swipeactionview.ui
 
-import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -28,6 +30,8 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     private var minSliderX = 0f
     private var maxX = 0f
 
+    private lateinit var drawable: Drawable
+
     private val animDuration = 400L
 
     init {
@@ -40,6 +44,8 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
         View.inflate(context, R.layout.swipe_action_view, this)
 
         initDimensions()
+
+        setRootLayoutBg()
 
         slider.setOnTouchListener(MoveOnTouchListener({ actionMove(it) }, { actionUp(it) }))
     }
@@ -61,6 +67,11 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
                 })
     }
 
+    private fun setRootLayoutBg() {
+        drawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
+        rootLayout.background = drawable
+    }
+
     private fun actionMove(x: Float) {
         slider.x = getValueConsideringTheLimits(x, minSliderX, maxX)
     }
@@ -73,35 +84,52 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
         }
     }
 
-    private fun rejectSwipe() {
-        logD(TAG, "rejectSwipe")
-        context.toast("rejectSwipe")
-
-        slider.animateX(minSliderX)
-
-        val colorFrom = getRootLayoutBg()
-        val colorTo = context.color(R.color.reject)
-        ObjectAnimator.ofObject(rootLayout, "backgroundColor", ArgbEvaluator(), colorFrom, colorTo).setDuration(animDuration).start()
-    }
-
     private fun acceptSwipe() {
         logD(TAG, "acceptSwipe")
         context.toast("acceptSwipe")
 
         slider.animateX(maxX)
 
-        val colorFrom = getRootLayoutBg()
         val colorTo = context.color(R.color.accept)
-        ObjectAnimator.ofObject(rootLayout, "backgroundColor", ArgbEvaluator(), colorFrom, colorTo).setDuration(animDuration).start()
+        animRootLayoutBg(colorTo)
+    }
+
+    private fun rejectSwipe() {
+        logD(TAG, "rejectSwipe")
+        context.toast("rejectSwipe")
+
+        slider.animateX(minSliderX)
+
+        val colorTo = context.color(R.color.reject)
+        animRootLayoutBg(colorTo)
     }
 
     private fun bringBackSlider() {
+        logD(TAG, "bringBackSlider")
         slider.animateX(initialSliderX)
 
-        val colorFrom = getRootLayoutBg()
         val colorTo = Color.WHITE
-        ObjectAnimator.ofObject(rootLayout, "backgroundColor", ArgbEvaluator(), colorFrom, colorTo).setDuration(animDuration).start()
+        animRootLayoutBg(colorTo)
     }
+
+    private fun animRootLayoutBg(colorTo: Int) {
+        val animator = ObjectAnimator.ofFloat(0f, 1f)
+        animator.addUpdateListener {
+            val value = it.animatedValue as Float
+
+            drawable.setColorFilter(getAnimColor(colorTo, value), PorterDuff.Mode.SRC_ATOP)
+
+            if (value == 1.0f) slider.colorFilter = null
+        }
+        animator.setDuration(animDuration).start()
+    }
+
+    private fun getAnimColor(color: Int, value: Float) =
+            Color.argb(
+                    Math.round(Color.alpha(color) * value),
+                    Color.red(color),
+                    Color.green(color),
+                    Color.blue(color))
 
     private fun getRootLayoutBg(): Int {
         val background = rootLayout.background
