@@ -4,9 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
@@ -29,7 +27,10 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     private var sliderWidth = 0
     private var minSliderX = 0f
     private var maxSliderX = 0f
+
     private var lastSwipeColor = Color.WHITE
+    private var acceptColor = context.color(R.color.accept)
+    private var rejectColor = context.color(R.color.reject)
 
     private lateinit var drawable: Drawable
 
@@ -63,7 +64,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
                         minSliderX = rootLayout.x
                         maxSliderX = rootLayout.x + rootLayout.width - sliderWidth
 
-                        logD(TAG, "sliderWidth: $sliderWidth, minSliderX: $minSliderX, maxSliderX: $maxSliderX")
+                        logD(TAG, "initialSliderX: $initialSliderX, sliderWidth: $sliderWidth, minSliderX: $minSliderX, maxSliderX: $maxSliderX")
                     }
                 })
     }
@@ -74,21 +75,28 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     private fun actionMove(dx: Float) {
-        val newX = slider.x + dx
-        slider.x = getValueConsideringTheLimits(newX, minSliderX, maxSliderX)
-
-        changeSliderBgColor(dx)
+        slider.x = getValueConsideringTheLimits(slider.x + dx, minSliderX, maxSliderX)
+        changeSliderBgColor()
     }
 
-    private fun changeSliderBgColor(dx: Float) {
-        logD(TAG, "dx: $dx")
-        if (dx > 0) {
-            // Move Right
-        } else {
-            // Move Left
+    private fun changeSliderBgColor() {
+        // initialSliderX: 534.0, sliderWidth: 259, minSliderX: 0.0, maxSliderX: 1069.0
+        val x = slider.x
 
+        if (x > initialSliderX) { // Move Right
+            val swipeRatio: Float = (maxSliderX - initialSliderX)
+            val ratio: Float = (x - initialSliderX) / swipeRatio
+            lastSwipeColor = getColorByMove(acceptColor, ratio)
+            drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+        } else { // Move Left
+            val ratio: Float = (initialSliderX - x) / initialSliderX
+            lastSwipeColor = getColorByMove(rejectColor, ratio)
+            drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
         }
     }
+
+    private fun getColorByMove(c: Int, value: Float) =
+            Color.argb(Math.round(Color.alpha(c) * value), Color.red(c), Color.green(c), Color.blue(c))
 
     private fun actionUp(x: Float) {
         when {
@@ -104,7 +112,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         slider.animateX(maxSliderX)
 
-        animRootLayoutBg(lastSwipeColor, context.color(R.color.accept))
+        animRootLayoutBg(lastSwipeColor, acceptColor)
     }
 
     private fun rejectSwipe() {
@@ -129,16 +137,6 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
         animator.addUpdateListener { drawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.setDuration(animDuration).start()
     }
-
-    private fun getRootLayoutBg() =
-            when (drawable) {
-                is ColorDrawable -> (drawable as ColorDrawable).color
-                is GradientDrawable -> {
-//                    (drawable as GradientDrawable)color
-                    Color.WHITE
-                }
-                else -> Color.WHITE
-            }
 
     private fun getValueConsideringTheLimits(value: Float, min: Float, max: Float) = Math.min(Math.max(min, value), max)
 

@@ -44,12 +44,7 @@ class MoveOnTouchListener(private val actionMove: (Float) -> Unit,
     }
 
     private fun actionMove(event: MotionEvent) {
-        // Find the index of the active pointer and fetch its position
-        val pointerIndex = event.findPointerIndex(activePointerId)
-        val x = event.getX(pointerIndex)
-        val dx = x - lastTouchX
-
-        actionMove(dx)
+        actionMove(event.getX(event.findPointerIndex(activePointerId)) - lastTouchX)
     }
 
     private fun actionPointerUp(event: MotionEvent) {
