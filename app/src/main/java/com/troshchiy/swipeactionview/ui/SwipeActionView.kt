@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import com.troshchiy.swipeactionview.App.Companion.APP
 import com.troshchiy.swipeactionview.R
@@ -16,10 +17,13 @@ import com.troshchiy.swipeactionview.extensions.*
 import kotlinx.android.synthetic.main.swipe_action_view.view.*
 
 
-class SwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : FrameLayout(context, attrs, defStyleAttr) {
 
     private var TAG = getLogTag<SwipeActionView>()
+
+    public var onAccept: () -> Unit = {}
+    public var onReject: () -> Unit = {}
 
     private val threshold = APP.dpToPx(36f)
 
@@ -107,27 +111,19 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     private fun acceptSwipe() {
-        logD(TAG, "acceptSwipe")
-        context.toast("acceptSwipe")
-
         slider.animateX(maxSliderX)
-
         animRootLayoutBg(lastSwipeColor, acceptColor)
+        onAccept()
     }
 
     private fun rejectSwipe() {
-        logD(TAG, "rejectSwipe")
-        context.toast("rejectSwipe")
-
         slider.animateX(minSliderX)
-
         animRootLayoutBg(lastSwipeColor, context.color(R.color.reject))
+        onReject()
     }
 
     private fun bringBackSlider() {
-        logD(TAG, "bringBackSlider")
         slider.animateX(initialSliderX)
-
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
     }
 
@@ -135,6 +131,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
         val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         lastSwipeColor = colorTo
         animator.addUpdateListener { drawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
+        animator.interpolator = DecelerateInterpolator()
         animator.setDuration(animDuration).start()
     }
 
