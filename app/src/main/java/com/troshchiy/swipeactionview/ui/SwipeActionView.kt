@@ -91,9 +91,7 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         slider.animateX(maxSliderX)
 
-        val colorFrom = context.color(android.R.color.white)
-        val colorTo = context.color(R.color.accept)
-        animRootLayoutBg(colorFrom, colorTo)
+        animRootLayoutBg(lastSwipeColor, context.color(R.color.accept))
     }
 
     private fun rejectSwipe() {
@@ -102,18 +100,14 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
 
         slider.animateX(minSliderX)
 
-        val colorFrom = context.color(android.R.color.white)
-        val colorTo = context.color(R.color.reject)
-        animRootLayoutBg(colorFrom, colorTo)
+        animRootLayoutBg(lastSwipeColor, context.color(R.color.reject))
     }
 
     private fun bringBackSlider() {
         logD(TAG, "bringBackSlider")
         slider.animateX(initialSliderX)
 
-        val colorFrom = lastSwipeColor
-        val colorTo = Color.WHITE
-        animRootLayoutBg(colorFrom, colorTo)
+        animRootLayoutBg(lastSwipeColor, Color.WHITE)
     }
 
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
