@@ -74,9 +74,20 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     private fun actionMove(dx: Float) {
-        logD(TAG, "dx: $dx")
         val newX = slider.x + dx
         slider.x = getValueConsideringTheLimits(newX, minSliderX, maxSliderX)
+
+        changeSliderBgColor(dx)
+    }
+
+    private fun changeSliderBgColor(dx: Float) {
+        logD(TAG, "dx: $dx")
+        if (dx > 0) {
+            // Move Right
+        } else {
+            // Move Left
+
+        }
     }
 
     private fun actionUp(x: Float) {
