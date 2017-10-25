@@ -6,7 +6,8 @@ import android.view.MotionEvent.INVALID_POINTER_ID
 import android.view.View
 
 
-class MoveOnTouchListener(private val actionMove: (Float) -> Unit, private val actionUp: (Float) -> Unit) : View.OnTouchListener {
+class MoveOnTouchListener(private val actionMove: (Float) -> Unit,
+                          private val actionUp: (Float) -> Unit) : View.OnTouchListener {
 
     // The ‘active pointer’ is the one currently moving our object.
     private var activePointerId = INVALID_POINTER_ID
@@ -20,7 +21,7 @@ class MoveOnTouchListener(private val actionMove: (Float) -> Unit, private val a
             true
         }
         MotionEvent.ACTION_MOVE -> {
-            actionMove(v, event)
+            actionMove(event)
             true
         }
         MotionEvent.ACTION_POINTER_UP -> {
@@ -42,13 +43,13 @@ class MoveOnTouchListener(private val actionMove: (Float) -> Unit, private val a
         lastTouchX = event.getX(activePointerId)
     }
 
-    private fun actionMove(v: View, event: MotionEvent) {
+    private fun actionMove(event: MotionEvent) {
         // Find the index of the active pointer and fetch its position
         val pointerIndex = event.findPointerIndex(activePointerId)
         val x = event.getX(pointerIndex)
         val dx = x - lastTouchX
 
-        actionMove(v.x + dx)
+        actionMove(dx)
     }
 
     private fun actionPointerUp(event: MotionEvent) {

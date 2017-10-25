@@ -73,8 +73,10 @@ class SwipeActionView @JvmOverloads constructor(context: Context, attrs: Attribu
         rootLayout.background = drawable
     }
 
-    private fun actionMove(x: Float) {
-        slider.x = getValueConsideringTheLimits(x, minSliderX, maxSliderX)
+    private fun actionMove(dx: Float) {
+        logD(TAG, "dx: $dx")
+        val newX = slider.x + dx
+        slider.x = getValueConsideringTheLimits(newX, minSliderX, maxSliderX)
     }
 
     private fun actionUp(x: Float) {
