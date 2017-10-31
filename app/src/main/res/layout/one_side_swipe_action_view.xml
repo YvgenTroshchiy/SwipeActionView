@@ -8,6 +8,17 @@
     android:background="@drawable/swipe_action_view_background"
     tools:background="@color/accept">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Swipe to Accept"
+        android:textSize="22sp"
+        tools:ignore="HardcodedText" />
+
     <ImageView
         android:id="@+id/slider"
         android:layout_width="@dimen/swipeView_size"
