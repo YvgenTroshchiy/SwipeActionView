@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.ViewTreeObserver
@@ -114,7 +115,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     }
 
     private fun debugBackState() {
-        setText("Swipe to Accept")
+        setText(context.string(R.string.swipe_to_accept))
         hideProgress()
     }
 
@@ -137,6 +138,6 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
         textView.text = text
     }
 
-    fun setImage(imageId: Int) = image.setImageDrawable(APP.getDrawable(imageId))
+    fun setImage(@DrawableRes imageId: Int) = image.setImageResource(imageId)
 
 }

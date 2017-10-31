@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         tools:background="@android:color/white"
-        tools:layout_height="@dimen/swipeView_size" />
+        tools:layout_height="@dimen/swipeView_sliderSize" />
 
     <com.troshchiy.swipeactionview.ui.widget.OneSideSwipeActionView
         android:id="@+id/oneSideSwipeActionView"
@@ -34,7 +34,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oneSideSwipeActionViewProgress"
         tools:background="@android:color/white"
-        tools:layout_height="@dimen/swipeView_size" />
+        tools:layout_height="@dimen/swipeView_sliderSize" />
 
     <com.troshchiy.swipeactionview.ui.widget.TwoSidesSwipeActionView
         android:id="@+id/twoSidesSwipeActionView"
@@ -48,6 +48,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/oneSideSwipeActionView"
         tools:background="@android:color/white"
-        tools:layout_height="@dimen/swipeView_size" />
+        tools:layout_height="@dimen/swipeView_sliderSize" />
 
 </android.support.constraint.ConstraintLayout>

@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/slider"
-        android:layout_width="@dimen/swipeView_size"
-        android:layout_height="@dimen/swipeView_size"
+        android:layout_width="@dimen/swipeView_sliderSize"
+        android:layout_height="@dimen/swipeView_sliderSize"
         android:layout_gravity="left"
         android:background="@drawable/white_circle_drawable"
         tools:ignore="RtlHardcoded" />

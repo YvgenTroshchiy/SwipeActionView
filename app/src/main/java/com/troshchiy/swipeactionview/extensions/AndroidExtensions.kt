@@ -2,6 +2,7 @@ package com.troshchiy.swipeactionview.extensions
 
 import android.content.Context
 import android.support.annotation.ColorRes
+import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,8 @@ import android.widget.Toast
 
 fun Context.toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) =
         Toast.makeText(this, text, duration).show()
+
+fun Context.string(@StringRes res: Int): String = resources.getString(res)
 
 fun Context.color(@ColorRes res: Int) = ContextCompat.getColor(this, res)
 
