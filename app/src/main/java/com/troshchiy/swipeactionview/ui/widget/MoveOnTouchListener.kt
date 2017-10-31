@@ -1,4 +1,4 @@
-package com.troshchiy.swipeactionview.ui
+package com.troshchiy.swipeactionview.ui.widget
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
