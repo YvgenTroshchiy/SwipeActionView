@@ -17,7 +17,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        oneSideSwipeActionViewProgress.onAccept = { oneSideSwipeActionViewProgress.showProgress() }
+        oneSideSwipeActionViewProgress.onAccept = {
+            oneSideSwipeActionViewProgress.setText("Done")
+            oneSideSwipeActionViewProgress.showProgress()
+        }
 
         oneSideSwipeActionView.onAccept = { toast("Accept") }
 

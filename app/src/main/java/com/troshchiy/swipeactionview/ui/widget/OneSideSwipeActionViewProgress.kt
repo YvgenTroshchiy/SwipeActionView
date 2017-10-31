@@ -110,7 +110,11 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
 
-        //TODO: Debug view
+        debugBackState()
+    }
+
+    private fun debugBackState() {
+        setText("Swipe to Accept")
         hideProgress()
     }
 
@@ -128,5 +132,11 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     fun hideProgress() = toggleProgress(0)
 
     private fun toggleProgress(childIndex: Int) = slider.post { slider.displayedChild = childIndex }
+
+    fun setText(text: String) {
+        textView.text = text
+    }
+
+    fun setImage(imageId: Int) = image.setImageDrawable(APP.getDrawable(imageId))
 
 }
