@@ -13,6 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupViews()
+    }
+
+    private fun setupViews() {
+        oneSideSwipeActionViewProgress.onAccept = { oneSideSwipeActionViewProgress.showProgress() }
+
         oneSideSwipeActionView.onAccept = { toast("Accept") }
 
         twoSidesSwipeActionView.onAccept = { toast("Accept") }

@@ -8,17 +8,31 @@
     android:background="#c7c7c7"
     tools:context="com.troshchiy.swipeactionview.ui.MainActivity">
 
+    <com.troshchiy.swipeactionview.ui.widget.OneSideSwipeActionViewProgress
+        android:id="@+id/oneSideSwipeActionViewProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/oneSideSwipeActionView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:background="@android:color/white"
+        tools:layout_height="@dimen/swipeView_size" />
+
     <com.troshchiy.swipeactionview.ui.widget.OneSideSwipeActionView
         android:id="@+id/oneSideSwipeActionView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintBottom_toTopOf="@+id/twoSidesSwipeActionView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/oneSideSwipeActionViewProgress"
         tools:background="@android:color/white"
         tools:layout_height="@dimen/swipeView_size" />
 
