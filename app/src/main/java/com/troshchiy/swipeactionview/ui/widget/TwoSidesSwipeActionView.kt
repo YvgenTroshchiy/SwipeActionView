@@ -7,14 +7,13 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import com.troshchiy.swipeactionview.App.Companion.APP
 import com.troshchiy.swipeactionview.R
 import com.troshchiy.swipeactionview.extensions.*
-import kotlinx.android.synthetic.main.swipe_action_view.view.*
+import kotlinx.android.synthetic.main.two_side_swipe_action_view.view.*
 
 
 class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -25,7 +24,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     var onAccept: () -> Unit = {}
     var onReject: () -> Unit = {}
 
-    private val threshold = APP.dpToPx(36f)
+    private val threshold = APP.dimension(R.dimen.swipeView_threshold)
 
     private var initialSliderX = 0f
     private var sliderWidth = 0
@@ -47,7 +46,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     private fun init() {
         if (isInEditMode) return
 
-        View.inflate(context, R.layout.swipe_action_view, this)
+        inflate(context, R.layout.two_side_swipe_action_view, this)
 
         initDimensions()
 

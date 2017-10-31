@@ -1,4 +1,4 @@
-package com.troshchiy.swipeactionview.ui
+package com.troshchiy.swipeactionview.ui.widget
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -7,25 +7,23 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import com.troshchiy.swipeactionview.App.Companion.APP
 import com.troshchiy.swipeactionview.R
 import com.troshchiy.swipeactionview.extensions.*
-import kotlinx.android.synthetic.main.swipe_action_view.view.*
+import kotlinx.android.synthetic.main.two_side_swipe_action_view.view.*
 
 
-public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var TAG = getLogTag<SwipeActionView>()
+    private var TAG = getLogTag<OneSideSwipeActionView>()
 
-    public var onAccept: () -> Unit = {}
-    public var onReject: () -> Unit = {}
+    var onAccept: () -> Unit = {}
 
-    private val threshold = APP.dpToPx(36f)
+    private val threshold = APP.dimension(R.dimen.swipeView_threshold)
 
     private var initialSliderX = 0f
     private var sliderWidth = 0
@@ -34,7 +32,6 @@ public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: 
 
     private var lastSwipeColor = Color.WHITE
     private var acceptColor = context.color(R.color.accept)
-    private var rejectColor = context.color(R.color.reject)
 
     private lateinit var drawable: Drawable
 
@@ -47,7 +44,7 @@ public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: 
     private fun init() {
         if (isInEditMode) return
 
-        View.inflate(context, R.layout.swipe_action_view, this)
+        inflate(context, R.layout.one_side_swipe_action_view, this)
 
         initDimensions()
 
@@ -92,10 +89,6 @@ public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: 
             val ratio: Float = (x - initialSliderX) / swipeRatio
             lastSwipeColor = getColorByMove(acceptColor, ratio)
             drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
-        } else { // Move Left
-            val ratio: Float = (initialSliderX - x) / initialSliderX
-            lastSwipeColor = getColorByMove(rejectColor, ratio)
-            drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
         }
     }
 
@@ -104,7 +97,6 @@ public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: 
 
     private fun actionUp(x: Float) {
         when {
-            x <= minSliderX + threshold -> rejectSwipe()
             x >= maxSliderX - threshold -> acceptSwipe()
             else -> bringBackSlider()
         }
@@ -112,14 +104,7 @@ public class SwipeActionView @JvmOverloads constructor(context: Context, attrs: 
 
     private fun acceptSwipe() {
         slider.animateX(maxSliderX)
-        animRootLayoutBg(lastSwipeColor, acceptColor)
         onAccept()
-    }
-
-    private fun rejectSwipe() {
-        slider.animateX(minSliderX)
-        animRootLayoutBg(lastSwipeColor, context.color(R.color.reject))
-        onReject()
     }
 
     private fun bringBackSlider() {

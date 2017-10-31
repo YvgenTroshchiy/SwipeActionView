@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- swipeView -->
+
+    <!-- Swipe Action View -->
     <dimen name="swipeView_size">74dp</dimen>
+    <dimen name="swipeView_threshold">36dp</dimen>
+    <!--    -->
+
 
 </resources>
