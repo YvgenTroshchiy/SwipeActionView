@@ -5,7 +5,7 @@
     <!--    Swipe Action View    -->
     <dimen name="swipeView_sliderSize">74dp</dimen>
     <dimen name="swipeView_imageSize">46dp</dimen>
-    <dimen name="swipeView_threshold">36dp</dimen>
+    <dimen name="swipeView_swipeThreshold">36dp</dimen>
     <!--    -->
 
 

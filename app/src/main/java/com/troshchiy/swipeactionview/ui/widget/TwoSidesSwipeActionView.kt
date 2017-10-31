@@ -24,7 +24,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     var onAccept: () -> Unit = {}
     var onReject: () -> Unit = {}
 
-    private val threshold = APP.dimension(R.dimen.swipeView_threshold)
+    private val threshold = APP.dimension(R.dimen.swipeView_swipeThreshold)
 
     private var initialSliderX = 0f
     private var sliderWidth = 0
