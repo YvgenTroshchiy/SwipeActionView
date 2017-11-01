@@ -6,6 +6,9 @@
     <dimen name="swipeView_sliderSize">74dp</dimen>
     <dimen name="swipeView_imageSize">46dp</dimen>
     <dimen name="swipeView_swipeThreshold">42dp</dimen>
+
+    <dimen name="swipeView_backgroundBorder_width">1dp</dimen>
+    <dimen name="swipeView_sliderBorder_width">2.5dp</dimen>
     <!--    -->
 
 

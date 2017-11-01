@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
@@ -89,6 +90,23 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
             val ratio: Float = (x - initialSliderX) / swipeRatio
             lastSwipeColor = getColorByMove(acceptColor, ratio)
             drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+
+            changeBorderColors(ratio)
+        }
+    }
+
+    //TODO: Refactor
+    private fun changeBorderColors(ratio: Float) {
+        val backgroundStrokeColor = getColorByMove(acceptColor, Math.min(ratio * 1.4f, 1f))
+
+        val d = backgroundStroke.drawable
+        if (d is GradientDrawable) {
+            d.setStroke(context.dimension(R.dimen.swipeView_backgroundBorder_width).toInt(), backgroundStrokeColor)
+        }
+
+        val d2 = slider.background
+        if (d2 is GradientDrawable) {
+            d2.setStroke(context.dimension(R.dimen.swipeView_sliderBorder_width).toInt(), backgroundStrokeColor)
         }
     }
 

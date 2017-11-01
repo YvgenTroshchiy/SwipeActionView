@@ -8,11 +8,11 @@
     android:layout_height="@dimen/swipeView_sliderSize"
     android:background="@drawable/swipe_action_view_background">
 
-    <View
+    <ImageView
         android:id="@+id/backgroundStroke"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/swipe_action_view_background_stroke" />
+        android:layout_height="@dimen/swipeView_sliderSize"
+        android:src="@drawable/swipe_action_view_background_stroke" />
 
     <TextView
         android:id="@+id/textView"
@@ -30,7 +30,7 @@
         android:layout_width="@dimen/swipeView_sliderSize"
         android:layout_height="@dimen/swipeView_sliderSize"
         android:layout_gravity="left"
-        android:background="@drawable/white_circle_drawable"
+        android:background="@drawable/swipe_action_view_slider"
         tools:ignore="RtlHardcoded">
 
         <ImageView

@@ -24,7 +24,7 @@
         android:layout_width="@dimen/swipeView_sliderSize"
         android:layout_height="@dimen/swipeView_sliderSize"
         android:layout_gravity="left"
-        android:background="@drawable/white_circle_drawable"
+        android:background="@drawable/swipe_action_view_slider"
         tools:ignore="RtlHardcoded" />
 
 </FrameLayout>
