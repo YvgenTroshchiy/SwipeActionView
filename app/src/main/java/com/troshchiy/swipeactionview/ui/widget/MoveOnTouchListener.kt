@@ -6,7 +6,8 @@ import android.view.MotionEvent.INVALID_POINTER_ID
 import android.view.View
 
 
-class MoveOnTouchListener(private val actionMove: (Float) -> Unit,
+class MoveOnTouchListener(private val actionDown: () -> Unit = {},
+                          private val actionMove: (Float) -> Unit,
                           private val actionUp: (Float) -> Unit) : View.OnTouchListener {
 
     // The ‘active pointer’ is the one currently moving our object.
@@ -41,6 +42,8 @@ class MoveOnTouchListener(private val actionMove: (Float) -> Unit,
 
         // Remember where we started (for dragging)
         lastTouchX = event.getX(activePointerId)
+
+        actionDown()
     }
 
     private fun actionMove(event: MotionEvent) {

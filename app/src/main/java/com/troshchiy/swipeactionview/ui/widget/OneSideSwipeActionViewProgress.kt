@@ -50,7 +50,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
 
         setRootLayoutBg()
 
-        slider.setOnTouchListener(MoveOnTouchListener({ actionMove(it) }, { actionUp(it) }))
+        slider.setOnTouchListener(MoveOnTouchListener(actionMove = { actionMove(it) }, actionUp = { actionUp(it) }))
     }
 
     private fun initDimensions() {
