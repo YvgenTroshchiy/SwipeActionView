@@ -127,8 +127,22 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
 
+        backBackBordersColors()
 
         debugBackState()
+    }
+
+    //TODO: Refactor
+    private fun backBackBordersColors() {
+        val color = context.color(R.color.colorPrimary)
+
+        backgroundStroke.drawable.let {
+            (it as? GradientDrawable)?.setStroke(context.dimension(R.dimen.swipeView_backgroundBorder_width).toInt(), color)
+        }
+
+        slider.background.let {
+            (it as? GradientDrawable)?.setStroke(context.dimension(R.dimen.swipeView_sliderBorder_width).toInt(), color)
+        }
     }
 
     private fun debugBackState() {
