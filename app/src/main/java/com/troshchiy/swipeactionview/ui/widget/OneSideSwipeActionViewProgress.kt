@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.ColorUtils
 import android.util.AttributeSet
 import android.view.ViewTreeObserver
 import android.view.animation.DecelerateInterpolator
@@ -95,18 +96,15 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
         }
     }
 
-    //TODO: Refactor
-    private fun changeBorderColors(ratio: Float) {
-        val backgroundStrokeColor = getColorByMove(acceptColor, Math.min(ratio * 1.4f, 1f))
+    private fun changeBorderColors(moveRatio: Float) {
+        val color = ColorUtils.blendARGB(context.color(R.color.colorPrimary), context.color(R.color.accept), Math.min(moveRatio * 1.4f, 1f))
 
-        val d = backgroundStroke.drawable
-        if (d is GradientDrawable) {
-            d.setStroke(context.dimension(R.dimen.swipeView_backgroundBorder_width).toInt(), backgroundStrokeColor)
+        backgroundStroke.drawable.let {
+            (it as? GradientDrawable)?.setStroke(context.dimension(R.dimen.swipeView_backgroundBorder_width).toInt(), color)
         }
 
-        val d2 = slider.background
-        if (d2 is GradientDrawable) {
-            d2.setStroke(context.dimension(R.dimen.swipeView_sliderBorder_width).toInt(), backgroundStrokeColor)
+        slider.background.let {
+            (it as? GradientDrawable)?.setStroke(context.dimension(R.dimen.swipeView_sliderBorder_width).toInt(), color)
         }
     }
 
@@ -128,6 +126,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private fun bringBackSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
+
 
         debugBackState()
     }
