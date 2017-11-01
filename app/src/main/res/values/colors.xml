@@ -7,4 +7,6 @@
     <color name="accept">#16a37b</color>
     <color name="reject">#cc4467</color>
 
+    <color name="border">#9998B3</color>
+
 </resources>
