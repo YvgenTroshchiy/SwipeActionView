@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
 
     <corners android:radius="60dp" />
-    <stroke android:width="@dimen/swipeView_backgroundBorder_width" android:color="@color/border" />
+    <stroke android:width="@dimen/swipeView_backgroundBorder_width" android:color="@color/swipeView_border" />
 
 </shape>

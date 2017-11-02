@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#252750</color>
     <color name="colorAccent">#00F9B9</color>
 
-    <color name="initialBackground">@android:color/white</color>
-    <color name="border">@color/colorPrimary</color>
-    <color name="accept">#16a37b</color>
-    <color name="reject">#cc4467</color>
+    <color name="swipeView_initialBackground">@android:color/white</color>
+    <color name="swipeView_border">@color/colorPrimary</color>
+    <color name="swipeView_accept">#16a37b</color>
+    <color name="swipeView_reject">#cc4467</color>
 
 </resources>

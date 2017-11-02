@@ -32,8 +32,8 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     private var maxSliderX = 0f
 
     private var lastSwipeColor = Color.WHITE
-    private var acceptColor = context.color(R.color.accept)
-    private var rejectColor = context.color(R.color.reject)
+    private var acceptColor = context.color(R.color.swipeView_accept)
+    private var rejectColor = context.color(R.color.swipeView_reject)
 
     private lateinit var drawable: Drawable
 
@@ -117,7 +117,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
 
     private fun rejectSwipe() {
         slider.animateX(minSliderX)
-        animRootLayoutBg(lastSwipeColor, context.color(R.color.reject))
+        animRootLayoutBg(lastSwipeColor, context.color(R.color.swipeView_reject))
         onReject()
     }
 

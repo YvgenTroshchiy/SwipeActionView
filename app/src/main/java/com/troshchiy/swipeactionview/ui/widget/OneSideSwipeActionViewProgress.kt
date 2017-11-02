@@ -32,9 +32,9 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private var minSliderX = 0f
     private var maxSliderX = 0f
 
-    private var lastSwipeColor = context.color(R.color.initialBackground)
-    private var acceptColor = context.color(R.color.accept)
-    private var borderColor = context.color(R.color.border)
+    private var lastSwipeColor = context.color(R.color.swipeView_initialBackground)
+    private var acceptColor = context.color(R.color.swipeView_accept)
+    private var borderColor = context.color(R.color.swipeView_border)
 
     private lateinit var bgDrawable: Drawable
     private var bgStrokeDrawable: GradientDrawable? = null

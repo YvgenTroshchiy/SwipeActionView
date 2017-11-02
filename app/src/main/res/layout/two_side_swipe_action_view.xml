@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/swipe_action_view_background"
-    tools:background="@color/accept">
+    tools:background="@color/swipeView_accept">
 
     <ImageView
         android:id="@+id/slider"

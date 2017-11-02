@@ -31,7 +31,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
     private var maxSliderX = 0f
 
     private var lastSwipeColor = Color.WHITE
-    private var acceptColor = context.color(R.color.accept)
+    private var acceptColor = context.color(R.color.swipeView_accept)
 
     private lateinit var drawable: Drawable
 
