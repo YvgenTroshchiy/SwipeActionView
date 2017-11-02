@@ -36,11 +36,11 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private var acceptColor = context.color(R.color.accept)
     private var borderColor = context.color(R.color.border)
 
-    private lateinit var backgrounddrawable: Drawable
-    private var backgroundStrokeDrawable: GradientDrawable? = null
+    private lateinit var bgDrawable: Drawable
+    private var bgStrokeDrawable: GradientDrawable? = null
     private var sliderBackground: GradientDrawable? = null
 
-    private val backgroundBorderWidth = context.dimension(R.dimen.swipeView_backgroundBorder_width).toInt()
+    private val bgBorderWidth = context.dimension(R.dimen.swipeView_backgroundBorder_width).toInt()
     private val sliderBorderWidth = context.dimension(R.dimen.swipeView_sliderBorder_width).toInt()
 
     private val animDuration = 400L
@@ -58,7 +58,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
 
         setRootLayoutBg()
 
-        backgroundStrokeDrawable = backgroundStroke.drawable as? GradientDrawable
+        bgStrokeDrawable = backgroundStroke.drawable as? GradientDrawable
         sliderBackground = slider.background as? GradientDrawable
 
         slider.setOnTouchListener(MoveOnTouchListener(actionMove = { actionMove(it) }, actionUp = { actionUp(it) }))
@@ -82,8 +82,8 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     }
 
     private fun setRootLayoutBg() {
-        backgrounddrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
-        rootLayout.background = backgrounddrawable
+        bgDrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
+        rootLayout.background = bgDrawable
     }
 
     private fun actionMove(dx: Float) {
@@ -98,8 +98,9 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
         if (x > initialSliderX) { // Move Right
             val swipeRatio: Float = (maxSliderX - initialSliderX)
             val ratio: Float = (x - initialSliderX) / swipeRatio
+
             lastSwipeColor = getColorByMove(acceptColor, ratio)
-            backgrounddrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
 
             changeBorderColors(ratio)
         }
@@ -108,7 +109,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private fun changeBorderColors(moveRatio: Float) {
         val color = ColorUtils.blendARGB(borderColor, acceptColor, Math.min(moveRatio * 1.4f, 1f))
 
-        backgroundStrokeDrawable?.setStroke(backgroundBorderWidth, color)
+        bgStrokeDrawable?.setStroke(bgBorderWidth, color)
         sliderBackground?.setStroke(sliderBorderWidth, color)
     }
 
@@ -137,7 +138,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     }
 
     private fun returnBordersColors() {
-        backgroundStrokeDrawable?.setStroke(backgroundBorderWidth, borderColor)
+        bgStrokeDrawable?.setStroke(bgBorderWidth, borderColor)
         sliderBackground?.setStroke(sliderBorderWidth, borderColor)
     }
 
@@ -149,7 +150,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
         val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         lastSwipeColor = colorTo
-        animator.addUpdateListener { backgrounddrawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
+        animator.addUpdateListener { bgDrawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.interpolator = DecelerateInterpolator()
         animator.setDuration(animDuration).start()
     }
