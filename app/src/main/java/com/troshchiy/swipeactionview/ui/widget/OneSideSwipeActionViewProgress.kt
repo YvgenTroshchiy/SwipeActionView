@@ -128,7 +128,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
         onAccept()
     }
 
-    private fun bringBackSlider() {
+    fun bringBackSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
 
