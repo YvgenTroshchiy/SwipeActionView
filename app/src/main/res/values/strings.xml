@@ -1,7 +1,14 @@
 <resources>
 
+
     <string name="app_name">SwipeActionView</string>
 
-    <string name="swipe_to_accept">Swipe to Accept</string>
+
+    <!--    Swipe Action View    -->
+    <string name="swipe_view_swipe_to_accept">Swipe to Accept</string>
+    <string name="swipe_view_accept">Accept</string>
+    <string name="swipe_view_reject">Reject</string>
+    <!--    -->
+
 
 </resources>

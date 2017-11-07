@@ -11,6 +11,7 @@
 
     <!--    Swipe Action View    -->
     <color name="swipeView_initialBackground">@android:color/white</color>
+    <color name="swipeView_text">@color/colorPrimary</color>
     <color name="swipeView_border">@color/colorPrimary</color>
     <color name="swipeView_accept">@color/colorAccent</color>
     <color name="swipeView_reject">#cc4467</color>

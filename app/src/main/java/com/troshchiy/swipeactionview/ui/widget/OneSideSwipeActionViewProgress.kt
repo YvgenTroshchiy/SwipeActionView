@@ -147,7 +147,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     }
 
     private fun debugBackState() {
-        setText(context.string(R.string.swipe_to_accept))
+        setText(context.string(R.string.swipe_view_swipe_to_accept))
         hideProgress()
     }
 

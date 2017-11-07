@@ -15,7 +15,8 @@
         android:layout_gravity="center"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Swipe to Accept"
+        android:text="@string/swipe_view_swipe_to_accept"
+        android:textColor="@color/swipeView_text"
         android:textSize="22sp"
         tools:ignore="HardcodedText" />
 
