@@ -91,10 +91,10 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
 
     private fun actionMove(dx: Float) {
         slider.x = getValueConsideringTheLimits(slider.x + dx, minSliderX, maxSliderX)
-        changeSliderBgColor()
+        changeColors()
     }
 
-    private fun changeSliderBgColor() {
+    private fun changeColors() {
         // initialSliderX: 534.0, sliderWidth: 259, minSliderX: 0.0, maxSliderX: 1069.0
         val x = slider.x
 

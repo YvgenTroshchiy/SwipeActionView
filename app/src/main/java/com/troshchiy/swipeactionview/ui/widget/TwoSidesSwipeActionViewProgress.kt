@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.ColorUtils
 import android.util.AttributeSet
 import android.view.ViewTreeObserver
 import android.view.animation.DecelerateInterpolator
@@ -91,10 +92,10 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
 
     private fun actionMove(dx: Float) {
         slider.x = getValueConsideringTheLimits(slider.x + dx, minSliderX, maxSliderX)
-        changeSliderBgColor()
+        changeColors()
     }
 
-    private fun changeSliderBgColor() {
+    private fun changeColors() {
         // initialSliderX: 534.0, sliderWidth: 259, minSliderX: 0.0, maxSliderX: 1069.0
         val x = slider.x
 
@@ -103,11 +104,22 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
             val ratio: Float = (x - initialSliderX) / swipeRatio
             lastSwipeColor = getColorByMove(acceptColor, ratio)
             bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+
+            changeBorderColors(acceptColor, ratio)
         } else { // Move Left
             val ratio: Float = (initialSliderX - x) / initialSliderX
             lastSwipeColor = getColorByMove(rejectColor, ratio)
             bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+
+            changeBorderColors(rejectColor, ratio)
         }
+    }
+
+    private fun changeBorderColors(aimColor: Int, moveRatio: Float) {
+        val color = ColorUtils.blendARGB(borderColor, aimColor, Math.min(moveRatio * 1.4f, 1f))
+
+        bgStrokeDrawable?.setStroke(bgBorderWidth, color)
+        sliderBackground?.setStroke(sliderBorderWidth, color)
     }
 
     private fun getColorByMove(c: Int, value: Float) =
