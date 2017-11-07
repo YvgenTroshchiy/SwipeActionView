@@ -149,6 +149,13 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     private fun bringBackSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
+
+        returnBordersColors()
+    }
+
+    private fun returnBordersColors() {
+        bgStrokeDrawable?.setStroke(bgBorderWidth, borderColor)
+        sliderBackground?.setStroke(sliderBorderWidth, borderColor)
     }
 
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
