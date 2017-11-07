@@ -113,6 +113,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
             bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
 
             changeBorderColors(rejectColor, ratio)
+            changeLabelsByReject(ratio)
         }
     }
 
@@ -128,6 +129,15 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         val ratioHide = Math.max(1 - moveRatio * 5f, 0f)
 
         tv_accept_swiped.alpha = ratioShow
+        tv_reject.alpha = ratioHide
+        tv_accept.alpha = ratioHide
+    }
+
+    private fun changeLabelsByReject(moveRatio: Float) {
+        val ratioShow = Math.min(moveRatio * 2f, 1f)
+        val ratioHide = Math.max(1 - moveRatio * 5f, 0f)
+
+        tv_reject_swiped.alpha = ratioShow
         tv_reject.alpha = ratioHide
         tv_accept.alpha = ratioHide
     }
