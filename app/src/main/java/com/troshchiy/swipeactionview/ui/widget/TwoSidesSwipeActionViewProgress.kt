@@ -127,7 +127,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         val ratioShow = Math.min(moveRatio * 2f, 1f)
         val ratioHide = Math.max(1 - moveRatio * 5f, 0f)
 
-        tv_reject_accept.alpha = ratioShow
+        tv_accept_swiped.alpha = ratioShow
         tv_reject.alpha = ratioHide
         tv_accept.alpha = ratioHide
     }
@@ -174,7 +174,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     }
 
     private fun returnRejectLabels() {
-        tv_reject_accept.alpha = 0f
+        tv_accept_swiped.alpha = 0f
         tv_reject.startAlphaAnimation(true)
         tv_accept.startAlphaAnimation(true)
     }
