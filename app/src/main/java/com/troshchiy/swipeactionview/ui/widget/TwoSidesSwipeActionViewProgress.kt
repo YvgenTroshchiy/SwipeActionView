@@ -62,7 +62,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         bgStrokeDrawable = backgroundStroke.drawable as? GradientDrawable
         sliderBackground = slider.background as? GradientDrawable
 
-        slider.setOnTouchListener(MoveOnTouchListener(actionMove = { actionMove(it) }, actionUp = { actionUp(it) }))
+        slider.setOnTouchListener(MoveOnTouchListener({ actionDown() }, { actionMove(it) }, { actionUp(it) }))
     }
 
     private fun initDimensions() {
@@ -86,6 +86,8 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         bgDrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
         rootLayout.background = bgDrawable
     }
+
+    private fun actionDown() = requestDisallowInterceptTouchEvent(true)
 
     private fun actionMove(dx: Float) {
         slider.x = getValueConsideringTheLimits(slider.x + dx, minSliderX, maxSliderX)
@@ -117,6 +119,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
             x >= maxSliderX - threshold -> acceptSwipe()
             else -> bringBackSlider()
         }
+        requestDisallowInterceptTouchEvent(false)
     }
 
     private fun acceptSwipe() {
