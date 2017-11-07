@@ -105,7 +105,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
         when {
             x <= minSliderX + threshold -> rejectSwipe()
             x >= maxSliderX - threshold -> acceptSwipe()
-            else -> bringBackSlider()
+            else -> returnSlider()
         }
     }
 
@@ -121,7 +121,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
         onReject()
     }
 
-    private fun bringBackSlider() {
+    private fun returnSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
     }

@@ -98,7 +98,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
     private fun actionUp(x: Float) {
         when {
             x >= maxSliderX - threshold -> acceptSwipe()
-            else -> bringBackSlider()
+            else -> returnSlider()
         }
     }
 
@@ -107,7 +107,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
         onAccept()
     }
 
-    private fun bringBackSlider() {
+    private fun returnSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
     }
