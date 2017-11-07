@@ -16,27 +16,42 @@
         android:src="@drawable/swipe_action_view_background_stroke" />
 
     <TextView
-        android:id="@+id/tv_accept"
+        android:id="@+id/tv_reject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="32dp"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginLeft="@dimen/swipeView_text_horizontalMargin"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/swipe_view_accept"
+        android:text="@string/swipe_view_reject"
         android:textColor="@color/swipeView_text_normal"
         android:textSize="22sp"
         tools:ignore="HardcodedText,RtlHardcoded" />
 
     <TextView
-        android:id="@+id/tv_reject"
+        android:id="@+id/tv_reject_accept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
-        android:layout_marginLeft="32dp"
+        android:layout_marginLeft="@dimen/swipeView_text_horizontalMargin"
+        android:alpha="0"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/swipe_view_reject"
+        android:text="@string/swipe_view_accept"
+        android:textColor="@color/swipeView_text_swiped"
+        android:textSize="22sp"
+        tools:alpha="1"
+        tools:ignore="HardcodedText,RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/tv_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/swipeView_text_horizontalMargin"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/swipe_view_accept"
         android:textColor="@color/swipeView_text_normal"
         android:textSize="22sp"
         tools:ignore="HardcodedText,RtlHardcoded" />

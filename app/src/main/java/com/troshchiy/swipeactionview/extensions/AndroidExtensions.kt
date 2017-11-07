@@ -21,3 +21,6 @@ fun Context.dimension(res: Int): Float = resources.getDimension(res)
 
 fun View.animateX(x: Float, duration: Long = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()) =
         animate().x(x).setDuration(duration).start()
+
+fun View.startAlphaAnimation(show: Boolean, duration: Long = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()) =
+        this.animate().alpha(if (show) 1f else 0f).setDuration(duration).start()

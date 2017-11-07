@@ -106,6 +106,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
             bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
 
             changeBorderColors(acceptColor, ratio)
+            changeLabelsByAccept(ratio)
         } else { // Move Left
             val ratio: Float = (initialSliderX - x) / initialSliderX
             lastSwipeColor = getColorByMove(rejectColor, ratio)
@@ -122,6 +123,15 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         sliderBackground?.setStroke(sliderBorderWidth, color)
     }
 
+    private fun changeLabelsByAccept(moveRatio: Float) {
+        val ratioShow = Math.min(moveRatio * 2f, 1f)
+        val ratioHide = Math.max(1 - moveRatio * 5f, 0f)
+
+        tv_reject_accept.alpha = ratioShow
+        tv_reject.alpha = ratioHide
+        tv_accept.alpha = ratioHide
+    }
+
     private fun getColorByMove(c: Int, value: Float) =
             Color.argb(Math.round(Color.alpha(c) * value), Color.red(c), Color.green(c), Color.blue(c))
 
@@ -129,7 +139,10 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         when {
             x <= minSliderX + threshold -> rejectSwipe()
             x >= maxSliderX - threshold -> acceptSwipe()
-            else -> bringBackSlider()
+            else -> {
+                returnSlider()
+                returnRejectLabels()
+            }
         }
         requestDisallowInterceptTouchEvent(false)
     }
@@ -146,7 +159,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         onReject()
     }
 
-    private fun bringBackSlider() {
+    private fun returnSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
 
@@ -158,6 +171,12 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     private fun returnBordersColors() {
         bgStrokeDrawable?.setStroke(bgBorderWidth, borderColor)
         sliderBackground?.setStroke(sliderBorderWidth, borderColor)
+    }
+
+    private fun returnRejectLabels() {
+        tv_reject_accept.alpha = 0f
+        tv_reject.startAlphaAnimation(true)
+        tv_accept.startAlphaAnimation(true)
     }
 
     private fun debugBackState() {

@@ -11,6 +11,7 @@
     <dimen name="swipeView_sliderBorder_width">2.5dp</dimen>
 
     <dimen name="swipeView_verticalMargin">32dp</dimen>
+    <dimen name="swipeView_text_horizontalMargin">42dp</dimen>
     <!--    -->
 
 
