@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+    <!--    Main palette    -->
     <color name="colorPrimary">#333268</color>
     <color name="colorPrimaryDark">#252750</color>
     <color name="colorAccent">#00F9B9</color>
+    <!--    -->
 
 
     <!--    Swipe Action View    -->
     <color name="swipeView_initialBackground">@android:color/white</color>
     <color name="swipeView_border">@color/colorPrimary</color>
-    <color name="swipeView_accept">#16a37b</color>
+    <color name="swipeView_accept">@color/colorAccent</color>
     <color name="swipeView_reject">#cc4467</color>
     <!--    -->
 
