@@ -9,6 +9,8 @@
 
     <dimen name="swipeView_backgroundBorder_width">1dp</dimen>
     <dimen name="swipeView_sliderBorder_width">2.5dp</dimen>
+
+    <dimen name="swipeView_verticalMargin">32dp</dimen>
     <!--    -->
 
 

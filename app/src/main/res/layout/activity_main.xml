@@ -28,11 +28,25 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/twoSidesSwipeActionView"
+        android:layout_marginTop="@dimen/swipeView_verticalMargin"
+        app:layout_constraintBottom_toTopOf="@+id/twoSidesSwipeActionViewProgress"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/oneSideSwipeActionViewProgress"
+        tools:background="@android:color/white"
+        tools:layout_height="@dimen/swipeView_sliderSize" />
+
+    <com.troshchiy.swipeactionview.ui.widget.TwoSidesSwipeActionViewProgress
+        android:id="@+id/twoSidesSwipeActionViewProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/swipeView_verticalMargin"
+        app:layout_constraintBottom_toTopOf="@+id/twoSidesSwipeActionView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/oneSideSwipeActionView"
         tools:background="@android:color/white"
         tools:layout_height="@dimen/swipeView_sliderSize" />
 
@@ -42,11 +56,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="@dimen/swipeView_verticalMargin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/oneSideSwipeActionView"
+        app:layout_constraintTop_toBottomOf="@id/twoSidesSwipeActionViewProgress"
         tools:background="@android:color/white"
         tools:layout_height="@dimen/swipeView_sliderSize" />
 
