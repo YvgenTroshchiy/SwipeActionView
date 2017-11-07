@@ -151,7 +151,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
             x >= maxSliderX - threshold -> acceptSwipe()
             else -> {
                 returnSlider()
-                returnRejectLabels()
+                returnLabels()
             }
         }
         requestDisallowInterceptTouchEvent(false)
@@ -183,10 +183,11 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         sliderBackground?.setStroke(sliderBorderWidth, borderColor)
     }
 
-    private fun returnRejectLabels() {
+    private fun returnLabels() {
         tv_accept_swiped.alpha = 0f
-        tv_reject.startAlphaAnimation(true)
+        tv_reject_swiped.alpha = 0f
         tv_accept.startAlphaAnimation(true)
+        tv_reject.startAlphaAnimation(true)
     }
 
     private fun debugBackState() {
