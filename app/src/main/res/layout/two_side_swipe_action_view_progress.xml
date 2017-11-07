@@ -59,6 +59,22 @@
         android:textSize="22sp"
         tools:ignore="HardcodedText,RtlHardcoded" />
 
+    <!-- Reject Swiped -->
+    <TextView
+        android:id="@+id/tv_reject_swiped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/swipeView_text_horizontalMargin"
+        android:alpha="0"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/swipe_view_reject"
+        android:textColor="@color/swipeView_text_swiped"
+        android:textSize="22sp"
+        tools:alpha="1"
+        tools:ignore="HardcodedText,RtlHardcoded" />
+
     <!-- Slider -->
     <ViewSwitcher
         android:id="@+id/slider"
