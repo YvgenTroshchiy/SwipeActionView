@@ -151,11 +151,17 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
 
         returnBordersColors()
+
+        debugBackState()
     }
 
     private fun returnBordersColors() {
         bgStrokeDrawable?.setStroke(bgBorderWidth, borderColor)
         sliderBackground?.setStroke(sliderBorderWidth, borderColor)
+    }
+
+    private fun debugBackState() {
+        hideProgress()
     }
 
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
@@ -167,6 +173,11 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     }
 
     private fun getValueConsideringTheLimits(value: Float, min: Float, max: Float) = Math.min(Math.max(min, value), max)
+
+    fun showProgress() = toggleProgress(1)
+    fun hideProgress() = toggleProgress(0)
+
+    private fun toggleProgress(childIndex: Int) = slider.post { slider.displayedChild = childIndex }
 
     fun setImage(@DrawableRes imageId: Int) = image.setImageResource(imageId)
 

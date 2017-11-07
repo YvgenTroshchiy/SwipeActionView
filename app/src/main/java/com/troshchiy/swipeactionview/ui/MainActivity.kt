@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
             oneSideSwipeActionViewProgress.showProgress()
         }
 
+        twoSidesSwipeActionViewProgress.onAccept = {
+            twoSidesSwipeActionViewProgress.showProgress()
+        }
+
         oneSideSwipeActionView.onAccept = { toast("Accept") }
 
         twoSidesSwipeActionView.onAccept = { toast("Accept") }
