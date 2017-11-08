@@ -169,7 +169,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
         onReject()
     }
 
-    private fun returnSlider() {
+    fun returnSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
 

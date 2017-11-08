@@ -107,7 +107,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
         onAccept()
     }
 
-    private fun returnSlider() {
+    fun returnSlider() {
         slider.animateX(initialSliderX)
         animRootLayoutBg(lastSwipeColor, Color.WHITE)
     }
