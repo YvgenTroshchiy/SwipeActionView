@@ -37,7 +37,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private var acceptColor = context.color(R.color.swipeView_accept)
     private var borderColor = context.color(R.color.swipeView_border)
 
-    private lateinit var bgDrawable: Drawable
+    private var bgDrawable: Drawable? = null
     private var bgStrokeDrawable: GradientDrawable? = null
     private var sliderBackground: GradientDrawable? = null
 
@@ -83,7 +83,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     }
 
     private fun setRootLayoutBg() {
-        bgDrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
+        bgDrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background)?.mutate()
         rootLayout.background = bgDrawable
     }
 
@@ -103,7 +103,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
             val ratio: Float = (x - initialSliderX) / swipeRatio
 
             lastSwipeColor = getColorByMove(acceptColor, ratio)
-            bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            bgDrawable?.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
 
             changeBorderColors(ratio)
         }
@@ -154,7 +154,7 @@ class OneSideSwipeActionViewProgress @JvmOverloads constructor(context: Context,
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
         val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         lastSwipeColor = colorTo
-        animator.addUpdateListener { bgDrawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
+        animator.addUpdateListener { bgDrawable?.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.interpolator = DecelerateInterpolator()
         animator.setDuration(animDuration).start()
     }

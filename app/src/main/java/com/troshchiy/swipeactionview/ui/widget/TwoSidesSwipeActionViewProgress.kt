@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.ColorUtils
 import android.util.AttributeSet
@@ -38,7 +37,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     private var rejectColor = context.color(R.color.swipeView_reject)
     private var borderColor = context.color(R.color.swipeView_border)
 
-    private lateinit var bgDrawable: Drawable
+    private var bgDrawable: Drawable? = null
     private var bgStrokeDrawable: GradientDrawable? = null
     private var sliderBackground: GradientDrawable? = null
 
@@ -84,7 +83,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     }
 
     private fun setRootLayoutBg() {
-        bgDrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
+        bgDrawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background)?.mutate()
         rootLayout.background = bgDrawable
     }
 
@@ -103,14 +102,14 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
             val swipeRatio: Float = (maxSliderX - initialSliderX)
             val ratio: Float = (x - initialSliderX) / swipeRatio
             lastSwipeColor = getColorByMove(acceptColor, ratio)
-            bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            bgDrawable?.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
 
             changeBorderColors(acceptColor, ratio)
             changeLabelsByAccept(ratio)
         } else { // Move Left
             val ratio: Float = (initialSliderX - x) / initialSliderX
             lastSwipeColor = getColorByMove(rejectColor, ratio)
-            bgDrawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            bgDrawable?.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
 
             changeBorderColors(rejectColor, ratio)
             changeLabelsByReject(ratio)
@@ -197,7 +196,7 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
         val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         lastSwipeColor = colorTo
-        animator.addUpdateListener { bgDrawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
+        animator.addUpdateListener { bgDrawable?.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.interpolator = DecelerateInterpolator()
         animator.setDuration(animDuration).start()
     }
@@ -208,7 +207,5 @@ class TwoSidesSwipeActionViewProgress @JvmOverloads constructor(context: Context
     fun hideProgress() = toggleProgress(0)
 
     private fun toggleProgress(childIndex: Int) = slider.post { slider.displayedChild = childIndex }
-
-    fun setImage(@DrawableRes imageId: Int) = image.setImageResource(imageId)
 
 }

@@ -33,7 +33,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
     private var lastSwipeColor = Color.WHITE
     private var acceptColor = context.color(R.color.swipeView_accept)
 
-    private lateinit var drawable: Drawable
+    private var drawable: Drawable? = null
 
     private val animDuration = 400L
 
@@ -71,7 +71,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
     }
 
     private fun setRootLayoutBg() {
-        drawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
+        drawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background)?.mutate()
         rootLayout.background = drawable
     }
 
@@ -88,7 +88,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
             val swipeRatio: Float = (maxSliderX - initialSliderX)
             val ratio: Float = (x - initialSliderX) / swipeRatio
             lastSwipeColor = getColorByMove(acceptColor, ratio)
-            drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            drawable?.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
         }
     }
 
@@ -115,7 +115,7 @@ class OneSideSwipeActionView @JvmOverloads constructor(context: Context, attrs: 
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
         val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         lastSwipeColor = colorTo
-        animator.addUpdateListener { drawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
+        animator.addUpdateListener { drawable?.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.interpolator = DecelerateInterpolator()
         animator.setDuration(animDuration).start()
     }

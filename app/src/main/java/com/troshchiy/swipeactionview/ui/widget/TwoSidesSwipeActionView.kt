@@ -35,7 +35,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     private var acceptColor = context.color(R.color.swipeView_accept)
     private var rejectColor = context.color(R.color.swipeView_reject)
 
-    private lateinit var drawable: Drawable
+    private var drawable: Drawable? = null
 
     private val animDuration = 400L
 
@@ -73,7 +73,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     }
 
     private fun setRootLayoutBg() {
-        drawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background).mutate()
+        drawable = ContextCompat.getDrawable(context, R.drawable.swipe_action_view_background)?.mutate()
         rootLayout.background = drawable
     }
 
@@ -90,11 +90,11 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
             val swipeRatio: Float = (maxSliderX - initialSliderX)
             val ratio: Float = (x - initialSliderX) / swipeRatio
             lastSwipeColor = getColorByMove(acceptColor, ratio)
-            drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            drawable?.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
         } else { // Move Left
             val ratio: Float = (initialSliderX - x) / initialSliderX
             lastSwipeColor = getColorByMove(rejectColor, ratio)
-            drawable.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
+            drawable?.setColorFilter(lastSwipeColor, PorterDuff.Mode.SRC_ATOP)
         }
     }
 
@@ -129,7 +129,7 @@ class TwoSidesSwipeActionView @JvmOverloads constructor(context: Context, attrs:
     private fun animRootLayoutBg(colorFrom: Int, colorTo: Int) {
         val animator = ValueAnimator.ofArgb(colorFrom, colorTo)
         lastSwipeColor = colorTo
-        animator.addUpdateListener { drawable.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
+        animator.addUpdateListener { drawable?.setColorFilter(it.animatedValue as Int, PorterDuff.Mode.SRC_ATOP) }
         animator.interpolator = DecelerateInterpolator()
         animator.setDuration(animDuration).start()
     }
