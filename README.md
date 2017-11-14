@@ -1,2 +1,2 @@
-# Bubble Sort Visualization
+# Swipe Action View
 ![](images/sample.gif)
